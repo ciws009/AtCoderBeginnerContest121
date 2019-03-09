@@ -1,5 +1,5 @@
 #include <iostream>
 
 int main() {
-    std::cout << "Made Change on GitHub." << std::endl;
+    std::cout << "Made this change on Atom." << std::endl;
 }
