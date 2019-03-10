@@ -2,5 +2,7 @@
 using namespace std;
 
 int main() {
-    cout << "Hello, world" << endl;
+    int H, W, h, w;
+    cin >> H >> W >> h >> w;
+    cout << H * W - (h * W + w * H - h * w) << endl;
 }
