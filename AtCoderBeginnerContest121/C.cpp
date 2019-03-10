@@ -1,49 +1,24 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-void pairSort(long long a[], long long b[], long long n);
-
 int main() {
-    long long n, m;
-    long long *a, *b;
-
+    int n, m;
     cin >> n >> m;
-    a = new long long[n];
-    b = new long long[n];
+    vector<int> a(n), b(n);
+    for (int i = 0; i < n; i++) cin >> a[i] >> b[i];
+    vector<pair<int, int>> ab(n);
+    for (int i = 0; i < n; i++) ab[i] = make_pair(a[i], b[i]);
+
+    sort(ab.begin(), ab.end());
+
+    long long ans = 0;
+
     for (int i = 0; i < n; i++) {
-        cin >> a[i] >> b[i];
+        int buy = min(m, ab[i].second);
+        ans += (long long)ab[i].first * buy;
+        m -= buy;
     }
-
-    pairSort(a, b, n);
-
-    long long totalNumber = 0;
-    long long totalPrice = 0;
-
-    for (long long i = 0; i < n; i++) {
-        for (long long j = 0; j < b[i]; j++) {
-            if (totalNumber < m) {
-                totalNumber++;
-                totalPrice += a[i];
-            }
-        }
-    }
-    cout << totalPrice << endl;
-}
-
-void pairSort(long long a[], long long b[], long long n) {
-    bool flag = 1;
-    for (long long i = 0; flag; i++) {
-        flag = 0;
-        for (long long j = n - 1; j >= i + 1; j--) {
-            if (a[j] < a[j - 1]) {
-                long long temp1 = a[j];
-                long long temp2 = b[j];
-                a[j] = a[j - 1];
-                b[j] = b[j - 1];
-                a[j - 1] = temp1;
-                b[j - 1] = temp2;
-                flag = 1;
-            }
-        }
-    }
+    cout << ans << endl;
 }

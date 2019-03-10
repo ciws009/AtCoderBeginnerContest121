@@ -1,29 +1,22 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int main() {
-    int n, m, c, counter;
-    int *a, *b;
-
-    cin >> n >> m >> c;
-    counter = 0;
-    a = new int[n * m];
-    b = new int[m];
-    for (int i = 0; i < m; i++) cin >> b[i];
-    for (int i = 0; i < n * m; i++) cin >> a[i];
-    int i = 0;
-    while (i < n * m) {
+    int N, M, C;
+    cin >> N >> M >> C;
+    vector<int> B(M);
+    for (int i = 0; i < M; i++) cin >> B[i];
+    int ans = 0;
+    for (int i = 0; i < N; i++) {
         int sum = 0;
-        for (int j = 0; i < m; j++) {
-            sum += a[i] * b[j];
-            i++;
+        for (int j = 0; j < M; j++) {
+            int Aij;
+            cin >> Aij;
+            sum += Aij * B[j];
         }
-        sum += c;
-        if (sum > 0) counter++;
+        sum += C;
+        if (sum > 0) ans++;
     }
-
-    cout << counter << endl;
-
-    delete [] a;
-    delete [] b;
+    cout << ans << endl;
 }
